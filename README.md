@@ -2,6 +2,20 @@
 
 Minimal Node.js + TypeScript project for AWS Lambda with a checkout handler and AWS SAM deployment files.
 
+## Project Summary
+
+This project is a minimal Node.js + TypeScript AWS Lambda service for a synchronous checkout flow, packaged for AWS SAM deployment and backed by unit tests. The main endpoint is `POST /v1/checkout`, where the handler validates the request, fetches catalog and pricing data, calculates totals, creates a pending order, creates an invoice, and initiates payment before returning a checkout response.
+
+The code is organized by responsibility:
+
+- `src/handler.ts` contains the Lambda entrypoint and checkout orchestration flow
+- `src/checkout/types.ts` contains checkout domain and API types
+- `src/checkout/services.ts` contains service contracts and stub integrations for catalog, pricing, order, invoice, and payment
+- `src/shared/http.ts` contains shared HTTP helpers such as `HttpError`, `jsonResponse`, `handleHttpError`, and `enforceRoute`
+- `template.yaml` and `samconfig.toml` provide AWS SAM deployment support
+
+The project also includes a sample local API Gateway event in `events/checkout.json` and unit tests in `test/handler.test.ts`. The tests cover the success path, validation failures, route mismatch, and upstream payment failure.
+
 ## Prerequisites
 
 - Node.js 20+
