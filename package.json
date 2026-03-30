@@ -1,0 +1,25 @@
+{
+  "name": "aws-order-handler",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sample Node.js TypeScript AWS Lambda project",
+  "main": "dist/handler.js",
+  "types": "dist/handler.d.ts",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:test": "tsc -p tsconfig.test.json",
+    "clean": "rm -rf dist",
+    "clean:test": "rm -rf dist-test",
+    "package": "npm run clean && npm run build && cd dist && zip -r ../lambda.zip .",
+    "start": "npm run build && node -e \"const { handler } = require('./dist/handler.js'); const event = require('./events/checkout.json'); handler(event).then((result) => console.log(JSON.stringify(result, null, 2)));\"",
+    "test": "npm run clean:test && npm run build:test && node --test dist-test/test/**/*.test.js"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "@types/node": "^22.14.1",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AWS SAM template for the aws-order-handler Lambda
+
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    Timeout: 10
+    MemorySize: 128
+    Architectures:
+      - arm64
+
+Resources:
+  OrderHandlerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: aws-order-handler
+      CodeUri: .
+      Handler: dist/handler.handler
+      Description: Sample order handler Lambda function
+      Events:
+        OrderHandlerApi:
+          Type: HttpApi
+          Properties:
+            Path: /v1/checkout
+            Method: POST
+    Metadata:
+      BuildMethod: makefile
+
+Outputs:
+  OrderHandlerFunctionArn:
+    Description: ARN of the Lambda function
+    Value: !GetAtt OrderHandlerFunction.Arn
+
+  OrderHandlerApiUrl:
+    Description: Invoke URL for the HTTP API endpoint
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/v1/checkout"

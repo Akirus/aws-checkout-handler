@@ -1,0 +1,29 @@
+{
+  "version": "2.0",
+  "routeKey": "POST /v1/checkout",
+  "rawPath": "/v1/checkout",
+  "rawQueryString": "",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "requestContext": {
+    "accountId": "local",
+    "apiId": "local",
+    "domainName": "localhost",
+    "domainPrefix": "local",
+    "http": {
+      "method": "POST",
+      "path": "/v1/checkout",
+      "protocol": "HTTP/1.1",
+      "sourceIp": "127.0.0.1",
+      "userAgent": "local-runner"
+    },
+    "requestId": "local-request",
+    "routeKey": "POST /v1/checkout",
+    "stage": "$default",
+    "time": "30/Mar/2026:12:00:00 +0000",
+    "timeEpoch": 1774872000000
+  },
+  "body": "{\"customerId\":\"cust_123\",\"currency\":\"USD\",\"items\":[{\"productId\":\"prod_1\",\"quantity\":2},{\"productId\":\"prod_2\",\"quantity\":1}],\"shippingAddress\":{\"country\":\"US\",\"city\":\"New York\",\"postalCode\":\"10001\",\"line1\":\"5th Avenue 1\"},\"paymentMethod\":{\"type\":\"stripe\",\"paymentMethodId\":\"pm_abc123\"}}",
+  "isBase64Encoded": false
+}
